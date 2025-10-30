@@ -151,7 +151,7 @@
     - Stat (immutable)
         - [ ] Lottos, Lotto, BonusNumber로 당첨 통계 생성
         - [ ] Rank별 당첨 횟수 관리
-        - [ ] PurchaseMoney로 총수익률 계산 -> 결과 StatResult로 반환
+        - [ ] PurchaseMoney로 총수익률 계산 -> 결과 StatDto로 반환
 
 3. Factory
     - LottoFactory 
@@ -165,7 +165,7 @@
         - [ ] Randoms.pickUniqueNumbersInRange(1, 45, 6)를 호출해 랜덤 번호를 생성
 
 4. DTO
-    - StatResult 
+    - StatDto
         - [ ] Stat이 계산한 Rank별 당첨 횟수로 수익률 저장
         - [ ] View가 접근할 수 있는 데이터 제공
 
@@ -316,7 +316,7 @@
    │       └── AutoGenStrategy.java
    │
    ├── 📁dto
-   │   └── StatResult.java
+   │   └── StatDto.java
    │
    ├── 📁service
    │   └── LottoService.java
