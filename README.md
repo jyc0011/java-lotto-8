@@ -100,7 +100,7 @@
     - else 금지, indent depth 2 제한
         - Rank.of() 같은 Enum 메서드나 전략 패턴, Guard Clause 사용
     - wrapper
-        - PurchaseMoney, LottoNumber, BonusNumber
+        - PurchaseMoney, BonusNumber
         - 생성 시점에 모든 유효성 검증 수핼
         - 도메인은 유효함이 보장된 불변 객체만을 다룬다.
     - getter 지양
@@ -131,7 +131,6 @@
     - BonusNumber (immutable)
         - [ ] 1~45 범위 유효성 검증 -> 아닐시 IllegalArgumentException
         - [ ] 당첨 번호 중복 확인 -> 중복시 IllegalArgumentException
-        - [ ] 통계 계산 시 비교를 위해 LottoNumber 제공
 
 2. Domain
     - Lotto (immutable)
@@ -139,7 +138,7 @@
         - [ ] 1~45 범위 유효성 검증 -> 아닐시 IllegalArgumentException
         - [ ] 번호의 동일 여부 확인
         - [ ] 다른 로또(당첨 번호)와 일치하는 번호의 개수를 계산
-        - [ ] 특정 LottoNumber(보너스 번호)를 포함하는지 확인
+        - [ ] 특정 보너스 번호를 포함하는지 확인
         - [ ] 출력을 위해 정렬된 번호 목록을 제공
     - Lottos (immutable)
         - [ ] 발행한 Lotto 객체 목록 관리
@@ -305,6 +304,7 @@
    │   ├── Stat.java
    │   │
    │   ├── 📁wrapper
+   │   │   ├── Profit.java
    │   │   ├── PurchaseMoney.java
    │   │   └── BonusNumber.java
    │   │
