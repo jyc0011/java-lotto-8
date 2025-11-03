@@ -58,6 +58,7 @@ public enum Rank {
 
     /**
      * 일치 개수 출력
+     *
      * @return 일치 개수 (int)
      */
     public int getMatchCount() {
@@ -66,6 +67,7 @@ public enum Rank {
 
     /**
      * 보너스 번호 필요 여부 출력
+     *
      * @return 보너스 필요 여부 (boolean)
      */
     public boolean needsBonus() {

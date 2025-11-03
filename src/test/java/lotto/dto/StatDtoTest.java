@@ -1,14 +1,13 @@
 package lotto.dto;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.EnumMap;
+import java.util.Map;
 import lotto.domain.Rank;
 import lotto.domain.wrapper.Profit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.EnumMap;
-import java.util.Map;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("StatDto 테스트")
 class StatDtoTest {

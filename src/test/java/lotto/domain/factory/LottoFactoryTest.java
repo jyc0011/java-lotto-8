@@ -1,15 +1,14 @@
 package lotto.domain.factory;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.strategy.LottoGenStrategy;
 import lotto.domain.wrapper.PurchaseMoney;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("LottoFactory 테스트")
 class LottoFactoryTest {
@@ -34,8 +33,8 @@ class LottoFactoryTest {
      * Strategy 호출 횟수 확인을 위한 테스트용 클래스
      */
     private static class SpyLottoGenStrategy implements LottoGenStrategy {
-        private int callCount = 0;
         private final List<Integer> numbersToReturn = List.of(1, 2, 3, 4, 5, 6);
+        private int callCount = 0;
 
         @Override
         public List<Integer> generate() {

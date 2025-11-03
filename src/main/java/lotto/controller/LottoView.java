@@ -6,8 +6,7 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 
 /**
- * 입출력(I/O)을 담당하는 퍼사드(Facade)입니다.
- * (인스턴스 변수 2개 규칙 준수)
+ * 입출력(I/O)을 담당하는 퍼사드(Facade)입니다. (인스턴스 변수 2개 규칙 준수)
  */
 public class LottoView {
 
@@ -37,7 +36,7 @@ public class LottoView {
     /**
      * 당첨 번호 입력 요청
      *
-     * @return  문자열
+     * @return 문자열
      */
     public String readWinningNumbers() {
         return inputView.readWinningNumbers();

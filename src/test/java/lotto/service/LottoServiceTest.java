@@ -1,21 +1,20 @@
 package lotto.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
-import lotto.domain.wrapper.WinningCombo;
-import lotto.dto.StatDto;
 import lotto.domain.factory.LottoFactory;
 import lotto.domain.strategy.AutoGenStrategy;
 import lotto.domain.strategy.LottoGenStrategy;
 import lotto.domain.wrapper.BonusNumber;
 import lotto.domain.wrapper.PurchaseMoney;
+import lotto.domain.wrapper.WinningCombo;
+import lotto.dto.StatDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("로또 서비스(LottoService) 테스트")
 class LottoServiceTest {
@@ -27,7 +26,7 @@ class LottoServiceTest {
         PurchaseMoney money = new PurchaseMoney(1000);
         Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         BonusNumber bonusNumber = new BonusNumber(7, winningLotto);
-        WinningCombo winningCombo = new WinningCombo(winningLotto,bonusNumber);
+        WinningCombo winningCombo = new WinningCombo(winningLotto, bonusNumber);
         Lotto fifthPrizeLotto = new Lotto(List.of(1, 2, 3, 10, 11, 12));
         Lottos lottos = new Lottos(List.of(fifthPrizeLotto));
         StatDto result = lottoService.calculateStatistics(lottos, winningCombo, money);

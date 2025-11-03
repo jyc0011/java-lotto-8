@@ -4,8 +4,7 @@ import lotto.domain.Lotto;
 import lotto.view.ErrorMessage;
 
 /**
- * 보너스 번호 1개에 대한 Wrapper
- * 생성할 때 유효성 검증
+ * 보너스 번호 1개에 대한 Wrapper 생성할 때 유효성 검증
  */
 public class BonusNumber {
 
@@ -14,7 +13,7 @@ public class BonusNumber {
     /**
      * 보너스 번호 생성
      *
-     * @param number       보너스 번호 (1~45)
+     * @param number        보너스 번호 (1~45)
      * @param winningNumber 당첨 번호(Lotto 객체)
      * @throws IllegalArgumentException 1~45 사이의 수가 아님 or 당첨 번호와 중복될
      */

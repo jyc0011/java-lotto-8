@@ -1,11 +1,11 @@
 package lotto.controller;
 
 import lotto.domain.Lotto;
-import lotto.dto.PlayerPurchaseDto;
-import lotto.domain.wrapper.WinningCombo;
-import lotto.dto.StatDto;
 import lotto.domain.wrapper.BonusNumber;
 import lotto.domain.wrapper.PurchaseMoney;
+import lotto.domain.wrapper.WinningCombo;
+import lotto.dto.PlayerPurchaseDto;
+import lotto.dto.StatDto;
 
 /**
  * 메인 컨트롤러
@@ -48,6 +48,7 @@ public class LottoController {
             }
         }
     }
+
     private WinningCombo getWinningCombinationWithRetry() {
         Lotto winningLotto = getWinningNumbersWithRetry();
         BonusNumber bonusNumber = getBonusNumberWithRetry(winningLotto);

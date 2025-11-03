@@ -1,13 +1,11 @@
 package lotto.domain;
 
-import lotto.dto.StatDto;
-import lotto.domain.wrapper.BonusNumber;
+import java.util.EnumMap;
+import java.util.Map;
 import lotto.domain.wrapper.Profit;
 import lotto.domain.wrapper.PurchaseMoney;
 import lotto.domain.wrapper.WinningCombo;
-
-import java.util.EnumMap;
-import java.util.Map;
+import lotto.dto.StatDto;
 
 /**
  * 당첨 통계 계산
@@ -20,7 +18,7 @@ public class Stat {
      * @param purchasedLottos 구매한 모든 로또 (일급 컬렉션)
      * @param winningCombo    당첨 조합 (Lotto + BonusNumber)
      * @param money           구매 금액 (PurchaseMoney)
-     * @return                통계 결과 DTO (StatResult)
+     * @return 통계 결과 DTO (StatResult)
      */
     public StatDto calculate(Lottos purchasedLottos, WinningCombo winningCombo, PurchaseMoney money) {
         Map<Rank, Long> rankCounts = calculateRankCounts(purchasedLottos, winningCombo);

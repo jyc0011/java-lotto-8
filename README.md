@@ -1,7 +1,7 @@
 # java-lotto-precourse
 
-> 관련 함수를 묶어 클래스를 만들고, 객체들이 협력하여 하나의 큰 기능을 수행하도록 한다. 
-> 클래스와 함수에 대한 단위 테스트를 통해 의도한 대로 정확하게 작동하는 영역을 확보한다. 
+> 관련 함수를 묶어 클래스를 만들고, 객체들이 협력하여 하나의 큰 기능을 수행하도록 한다.
+> 클래스와 함수에 대한 단위 테스트를 통해 의도한 대로 정확하게 작동하는 영역을 확보한다.
 > 2주 차 공통 피드백(디스코드 참고)을 최대한 반영한다.
 
 ---
@@ -9,7 +9,9 @@
 ## 1. 요구사항
 
 ### 기능
+
 간단한 로또 발매기를 구현한다.
+
 - 로또 번호 숫자 범위 -> 1 ~ 45
 - 1개의 로또에는 중복되지 않는 6개의 숫자
 - 당첨 번호는 중복되지 않는 숫자 6개, 보너스 번호 1개
@@ -18,13 +20,15 @@
 - 당첨 번호와 보너스 번호를 입력받고, 로또와 당첨 번호를 비교해 당첨 내역 및 수익률을 출력, 로또 게임 종료
 - 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException, 에러 메시지 출력, 그 부분부터 입력 다시
 
-    | 구분 |  1등  |  2등   |  3등   |  4등   |  5등   |
-    |:--:|:----:|:-----:|:-----:|:-----:|:-----:|
-    | 일치 |  6  |  5+a  |   5   |   4   |   3   |
-    | 상금 |  2억  | 3000만 | 150만  |  5만   |  5천   |
+  | 구분 |  1등  |  2등   |  3등   |  4등   |  5등   |
+      |:--:|:----:|:-----:|:-----:|:-----:|:-----:|
+  | 일치 |  6  |  5+a  |   5   |   4   |   3   |
+  | 상금 |  2억  | 3000만 | 150만  |  5만   |  5천   |
 
 ### 입출력
+
 #### 입력
+
 - 로또 구입 금액 입력
     - 구입 금액 1,000원 단위
     - 1,000원으로 나누어 떨어지지 않는 경우 -> IllegalArgumentException
@@ -37,6 +41,7 @@
     - 당첨번호와 중복 시 ->  IllegalArgumentException
 
 #### 출력
+
 - 발행한 로또 수량 및 번호 출력, 번호는 오름차순 정렬
     ```text
     8개를 구매했습니다.
@@ -60,51 +65,53 @@
     ```
 
 ### 프로그래밍
+
 - JDK 21
-- Application의 main()에서 실행 
-- build.gradle 수정 금지, 외부 라이브러리 사용 금지 
-- System.exit() 호출 금지 
+- Application의 main()에서 실행
+- build.gradle 수정 금지, 외부 라이브러리 사용 금지
+- System.exit() 호출 금지
 - 제공된 Lotto 클래스 사용.
 - indent depth 2까지만 허용 (3 초과 금지)
 - else 예약어 사용 금지 (if/return, Enum, 다형성 활용)
 - 메서드(함수) 길이 15라인 이하
-- Java Enum 적극 활용 
+- Java Enum 적극 활용
 - UI 로직(View)을 제외한 모든 도메인/래퍼 클래스 단위 테스트(JUnit 5, AssertJ) 작성
 
 ---
 
 ## 2. 문제 분석
+
 로또 발매부터 당첨 통계까지 과정을 시뮬레이션 해야한다. 시뮬레이션은 아래와 같은 흐름으로 진행된다.
 
 - 입력, 검증
-  - 구입 금액, 당첨 번호, 보너스 번호 입력
-  - 모든 입력은 요구 사항에 따라 유효성 검증
-  - 오류 발생 시, [ERROR] 문구를 출력하고 해당 입력 단계부터 재시도
+    - 구입 금액, 당첨 번호, 보너스 번호 입력
+    - 모든 입력은 요구 사항에 따라 유효성 검증
+    - 오류 발생 시, [ERROR] 문구를 출력하고 해당 입력 단계부터 재시도
 - 발행
-  - 구입 금액에 맞는 로또 발매 장수 계산
-  - 장수만큼 Randoms API를 이용해 로또 자동 발매
-  - 발매한 로또 목록 출력
-- 추첨 결과 확인 및 통계 
-  - 발행된 로또와 당첨 번호 비교, 일치 여부 확인 
-  - 보너스 번호 일치 여부 추가 확인
-  - 당첨 내역 통계 생성 
-  - 최종 통계와 총수익률 계산, 출력
+    - 구입 금액에 맞는 로또 발매 장수 계산
+    - 장수만큼 Randoms API를 이용해 로또 자동 발매
+    - 발매한 로또 목록 출력
+- 추첨 결과 확인 및 통계
+    - 발행된 로또와 당첨 번호 비교, 일치 여부 확인
+    - 보너스 번호 일치 여부 추가 확인
+    - 당첨 내역 통계 생성
+    - 최종 통계와 총수익률 계산, 출력
 
 객체지향적인 풀이를 위해, 아래의 사항을 적용한다.
 
 - Domain
-  - Lotto: 로또 1장의 정보
-  - Rank: 당첨 등급(1등~5등, 꽝)과 상금, 당첨 조건 -> Enum 
-  - Stat: 최종 통계, 수익률
+    - Lotto: 로또 1장의 정보
+    - Rank: 당첨 등급(1등~5등, 꽝)과 상금, 당첨 조건 -> Enum
+    - Stat: 최종 통계, 수익률
 - 클린코드
     - else 금지, indent depth 2 제한
         - Rank.of() 같은 Enum 메서드나 전략 패턴, Guard Clause 사용
     - wrapper
-        - PurchaseMoney, BonusNumber
-        - 생성 시점에 모든 유효성 검증 수핼
+        - PurchaseMoney, BonusNumber, Profit, WinningCombo
+        - 생성 시점에 모든 유효성 검증 수행
         - 도메인은 유효함이 보장된 불변 객체만을 다룬다.
     - getter 지양
-        - 객체가 데이터를 get 하여 계산하는 것이 아니라, 스스로 처리
+        - 객체가 데이터를 get 하여 계산하는 것이 아니라, 스스로 처리(dto 제외)
 - 설계 패턴
     - SRP (단일 책임) / DIP (의존 역전)
         - AppConfig 의존성 주입
@@ -120,6 +127,7 @@
 ---
 
 ## 3. 구현 기능 목록
+
 1. Wrapper
     - PurchaseMoney (immutable)
         - [ ] 문자열 입력을 int로 변환, 유효성 검증
@@ -153,14 +161,14 @@
         - [ ] PurchaseMoney로 총수익률 계산 -> 결과 StatDto로 반환
 
 3. Factory
-    - LottoFactory 
+    - LottoFactory
         - [ ] LottoGenStrategy 주입
         - [ ] 구매 개수만큼 Lotto를 생성, Lottos로 리턴
 
 4. Strategy
     - LottoGenStrategy (Interface)
         - [ ] 로또 번호 6개 생성 규칙 정의
-    - AutoGenStrategy 
+    - AutoGenStrategy
         - [ ] Randoms.pickUniqueNumbersInRange(1, 45, 6)를 호출해 랜덤 번호를 생성
 
 4. DTO
@@ -175,7 +183,7 @@
         - [ ] Controller 요청 -> 당첨 통계 계산을 Stat에 위임, DTO 리턴
 
 6. Controller
-    - LottoController 
+    - LottoController
         - [ ] LottoView, LottoProcessor 주입
         - [ ] 전체 게임 실행 제어
             - view에서 입력을 받고, processor을 통해 파싱 및 연산 수행, view를 통해 출력
@@ -184,7 +192,7 @@
         - [ ] 입력을 InputView에게서 받음
         - [ ] 입력 재시도 제어
         - [ ] 출력 요청을 OutputView에 위임
-    - LottoProcessor 
+    - LottoProcessor
         - [ ] LottoService, InputParser 주입
         - [ ] 파싱 및 도메인 객체 생성 요청 수행
         - [ ] 비즈니스 로직 실행을 LottoService에 위임
@@ -192,7 +200,7 @@
 7. View
     - InputView
         - [ ] 구입금액, 당첨 번호, 보너스 번호 입력 요청 -> Console.readLine() 리턴
-     - OutputView
+    - OutputView
         - [ ] 구매한 로또 개수와 번호 목록 출력
         - [ ] 당첨 통계를 정해진 형식으로 출력
         - [ ] 총수익률을 소수점 둘째 자리에서 반올림해 출력
@@ -206,7 +214,7 @@
         - [ ] 에러 메시지 문자열 반환
 
 8. Configure
-    - AppConfig 
+    - AppConfig
         - [ ] 애플리케이션 실행에 필요한 객체 생성, 의존성 주입
         - [ ] View, Strategy, Factory, Parser, Service, Controller를 싱글톤으로 관리
         - [ ] Application이 LottoController()를 호출하도록 함
@@ -259,7 +267,7 @@
             - [ ] 1개 확인
                 - Given: Randoms가 예제 1 ([8, 21, 23, 41, 42, 43])을 반환하도록 설정
                 - When: 사용자 입력(Mock Console)으로 1000 -> 1,2,3,8,21,41 -> 42 입력
-                - Then: 
+                - Then:
                     - "1개를 구매했습니다."
                     - "[8, 21, 23, 41, 42, 43]"
                     - "4개 일치 (50,000원) - 1개"
@@ -282,9 +290,11 @@
                     - [ERROR] ... (보너스 중복)
                     - "3개 일치 (5,000원) - 1개"
                     - "총 수익률은 62.5%입니다."
+
 ---
 
 ## 4. 프로젝트 구조
+
 ```text
    📁lotto
    ├── Application.java
@@ -304,9 +314,10 @@
    │   ├── Stat.java
    │   │
    │   ├── 📁wrapper
+   │   │   ├── BonusNumber.java
    │   │   ├── Profit.java
    │   │   ├── PurchaseMoney.java
-   │   │   └── BonusNumber.java
+   │   │   └── WinningCombo.java
    │   │
    │   ├── 📁factory
    │   │   └── LottoFactory.java
@@ -316,6 +327,7 @@
    │       └── AutoGenStrategy.java
    │
    ├── 📁dto
+   │   ├── PlayerPurchaseDto.java
    │   └── StatDto.java
    │
    ├── 📁service
@@ -325,9 +337,9 @@
    │   └── InputParser.java
    │
    └── 📁view
+       ├── ErrorMessage.java
        ├── InputView.java
-       ├── OutputView.java
-       └── ErrorMessage.java
+       └── OutputView.java
 ```
 
 ---

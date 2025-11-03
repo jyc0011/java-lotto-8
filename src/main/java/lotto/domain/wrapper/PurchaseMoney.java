@@ -9,13 +9,11 @@ import lotto.domain.strategy.LottoGenStrategy;
 import lotto.view.ErrorMessage;
 
 /**
- * 로또 구입 금액 wrapper
- * 생성할 때 1,000원 단위 및 1,000원 이상 여부 검증
+ * 로또 구입 금액 wrapper 생성할 때 1,000원 단위 및 1,000원 이상 여부 검증
  */
 public class PurchaseMoney {
-    private final int amount;
-
     private static final int LOTTO_PRICE = 1000;
+    private final int amount;
 
     /**
      * 구매 금액 생성
@@ -30,7 +28,7 @@ public class PurchaseMoney {
     }
 
     /**
-     *1000원 단위인지 확인
+     * 1000원 단위인지 확인
      */
     private void validateUnit(int amount) {
         if (amount % LOTTO_PRICE != 0) {

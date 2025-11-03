@@ -1,21 +1,34 @@
 package lotto;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import java.util.stream.Stream;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import camp.nextstep.edu.missionutils.test.NsTest;
+import java.util.List;
+import java.util.stream.Stream;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
 class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
+
+    /**
+     * 재입력 시나리오에서 사용할 파라미터 제공
+     */
+    static Stream<Arguments> provideRetryScenarios() {
+        return Stream.of(
+                Arguments.of("구매 금액 재입력", (Object) new String[]{
+                        "1001", "abc", "8000", "1,2,3,4,5,6", "7"}),
+                Arguments.of("당첨 번호 재입력", (Object) new String[]{
+                        "8000", "1,2,3,4,5,5", "1,2,3", "1,2,3,4,5,6", "7"}),
+                Arguments.of("보너스 번호 재입력", (Object) new String[]{
+                        "8000", "1,2,3,4,5,6", "6", "46", "7"})
+        );
+    }
 
     @Test
     void 기능_테스트() {
@@ -57,20 +70,6 @@ class ApplicationTest extends NsTest {
             runException("1000j");
             assertThat(output()).contains(ERROR_MESSAGE);
         });
-    }
-
-    /**
-     * 재입력 시나리오에서 사용할 파라미터 제공
-     */
-    static Stream<Arguments> provideRetryScenarios() {
-        return Stream.of(
-                Arguments.of("구매 금액 재입력", (Object) new String[]{
-                        "1001", "abc", "8000", "1,2,3,4,5,6", "7"}),
-                Arguments.of("당첨 번호 재입력", (Object) new String[]{
-                        "8000", "1,2,3,4,5,5", "1,2,3", "1,2,3,4,5,6", "7"}),
-                Arguments.of("보너스 번호 재입력", (Object) new String[]{
-                        "8000", "1,2,3,4,5,6", "6", "46", "7"})
-        );
     }
 
     @DisplayName("예외 테스트: 잘못된 입력 시 에러 메시지 출력 후 재입력")

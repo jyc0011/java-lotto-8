@@ -1,13 +1,10 @@
 package lotto.domain.factory;
 
+import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.strategy.LottoGenStrategy;
 import lotto.domain.wrapper.PurchaseMoney;
-
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * Lotto와 Lottos 생성, LottoGenStrategy 주입

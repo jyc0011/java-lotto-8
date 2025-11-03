@@ -1,25 +1,24 @@
 package lotto.controller;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+
+import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
-import lotto.dto.PlayerPurchaseDto;
-import lotto.domain.wrapper.WinningCombo;
-import lotto.dto.StatDto;
 import lotto.domain.factory.LottoFactory;
 import lotto.domain.strategy.AutoGenStrategy;
 import lotto.domain.strategy.LottoGenStrategy;
 import lotto.domain.wrapper.BonusNumber;
 import lotto.domain.wrapper.PurchaseMoney;
+import lotto.domain.wrapper.WinningCombo;
+import lotto.dto.PlayerPurchaseDto;
+import lotto.dto.StatDto;
 import lotto.service.LottoService;
 import lotto.util.InputParser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 @DisplayName("LottoProcessor 테스트")
 class LottoProcessorTest {

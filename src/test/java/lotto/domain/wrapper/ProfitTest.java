@@ -1,17 +1,17 @@
 package lotto.domain.wrapper;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 @DisplayName("수익률(ProfitRate) 테스트")
 class ProfitTest {
 
     @ParameterizedTest(name = "{displayName} - 총상금: {0}원, 구매금액: {1}원 -> {2}")
-    @CsvSource({"5000,8000,'62.5%'","5000,1000,'500.0%'", "8000,8000,'100.0%'", "0, 8000,'0.0%'","1000,3000,'33.3%'"})
+    @CsvSource({"5000,8000,'62.5%'", "5000,1000,'500.0%'", "8000,8000,'100.0%'", "0, 8000,'0.0%'", "1000,3000,'33.3%'"})
     @DisplayName("총상금과 구매금액으로 수익률을 정확히 계산하고 포매팅한다.")
     void getFormattedRate_Success(long totalPrize, int purchaseAmount, String expectedFormat) {
         Profit profitRate = new Profit(totalPrize, purchaseAmount);

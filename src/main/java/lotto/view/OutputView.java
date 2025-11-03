@@ -1,19 +1,18 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
+import java.text.NumberFormat;
+import java.util.List;
 import lotto.domain.Lottos;
 import lotto.domain.Rank;
 import lotto.dto.StatDto;
-
-import java.text.NumberFormat;
-import java.util.List;
 
 /**
  * 출력 클래스
  */
 public class OutputView {
 
-    private static final List<Rank> RANKS_TO_PRINT = List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
+    private static final List<Rank> RANKS_TO_PRINT = List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND,
+            Rank.FIRST);
 
     /**
      * 구매 로또 수와 번호 목록을 출력

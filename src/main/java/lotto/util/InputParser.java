@@ -1,15 +1,14 @@
 package lotto.util;
 
 // import lotto.view.ErrorMessage; // ErrorMessage Enum 경로
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.view.ErrorMessage;
 
 /**
- * 사용자 입력을 파싱(Parsing)하고,
- * 입력 형식(Format)을 검증하는 책임을 가지는 클래스입니다.
- * (Stateless)
+ * 사용자 입력을 파싱(Parsing)하고, 입력 형식(Format)을 검증하는 책임을 가지는 클래스입니다. (Stateless)
  */
 public class InputParser {
 

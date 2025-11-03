@@ -1,10 +1,9 @@
 package lotto.dto;
 
-import lotto.domain.Rank;
-import lotto.domain.wrapper.Profit;
-
 import java.util.Collections;
 import java.util.Map;
+import lotto.domain.Rank;
+import lotto.domain.wrapper.Profit;
 
 /**
  * Stat 계산 결과를 View 계층으로 전달하는 DTO
@@ -18,7 +17,7 @@ public class StatDto {
      * 통계 결과 DTO 생성
      *
      * @param rankCounts 등수별 당첨 횟수 맵
-     * @param profit 계산된 수익률 객체
+     * @param profit     계산된 수익률 객체
      */
     public StatDto(Map<Rank, Long> rankCounts, Profit profit) {
         this.rankCounts = Collections.unmodifiableMap(rankCounts);

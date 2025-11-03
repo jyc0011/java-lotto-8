@@ -1,13 +1,11 @@
 package lotto.service;
 
-import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.Stat;
+import lotto.domain.factory.LottoFactory;
+import lotto.domain.wrapper.PurchaseMoney;
 import lotto.domain.wrapper.WinningCombo;
 import lotto.dto.StatDto;
-import lotto.domain.factory.LottoFactory;
-import lotto.domain.wrapper.BonusNumber;
-import lotto.domain.wrapper.PurchaseMoney;
 
 /**
  * 서비스
@@ -17,6 +15,7 @@ public class LottoService {
 
     /**
      * LottoFactory 주입, 객체 생성
+     *
      * @param lottoFactory
      */
     public LottoService(LottoFactory lottoFactory) {

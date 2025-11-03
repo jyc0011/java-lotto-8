@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,8 +13,7 @@ public class Lotto {
     private final List<Integer> numbers;
 
     /**
-     * 로또 번호 리스트로 Lotto 객체 생성
-     * 생성 시 유효성 확인과 정렬 수행
+     * 로또 번호 리스트로 Lotto 객체 생성 생성 시 유효성 확인과 정렬 수행
      *
      * @param numbers 6개의 로또 번호
      * @throws IllegalArgumentException

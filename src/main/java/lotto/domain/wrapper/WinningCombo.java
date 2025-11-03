@@ -15,7 +15,7 @@ public class WinningCombo {
      * 당첨 조합 생성
      *
      * @param winningNumber 당첨 번호 6개
-     * @param bonusNumber  보너스 번호 1개
+     * @param bonusNumber   보너스 번호 1개
      */
     public WinningCombo(Lotto winningNumber, BonusNumber bonusNumber) {
         this.winningNumber = winningNumber;
