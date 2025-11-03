@@ -20,7 +20,7 @@ public class LottoProcessor {
     private final InputParser parser;
 
     /**
-     * 로직 Facade를 생성합니다.
+     * 로직 Facade 생성
      *
      * @param lottoService
      * @param parser
@@ -49,7 +49,7 @@ public class LottoProcessor {
      * @return 유효성이 검증된 Lotto 객체
      * @throws IllegalArgumentException
      */
-    public Lotto createWinningLotto(String input) {
+    public Lotto createwinningNumber(String input) {
         List<Integer> numbers = parser.parseWinningNumbers(input);
         return new Lotto(numbers);
     }
@@ -58,13 +58,13 @@ public class LottoProcessor {
      * 문자열 입력 파싱, 검증, BonusNumber 객체 생성
      *
      * @param input        입력 문자열
-     * @param winningLotto 중복 검증을 위한 당첨 번호
+     * @param winningNumber 중복 검증을 위한 당첨 번호
      * @return 유효성이 검증된 BonusNumber 객체
      * @throws IllegalArgumentException
      */
-    public BonusNumber createBonusNumber(String input, Lotto winningLotto) {
+    public BonusNumber createBonusNumber(String input, Lotto winningNumber) {
         int number = parser.parseInt(input);
-        return new BonusNumber(number, winningLotto);
+        return new BonusNumber(number, winningNumber);
     }
 
     /**

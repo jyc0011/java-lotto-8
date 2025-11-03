@@ -15,14 +15,14 @@ import org.junit.jupiter.api.Test;
 class StatTest {
 
     private Stat stat;
-    private Lotto winningLotto;
+    private Lotto winningNumber;
     private BonusNumber bonusNumber;
 
     @BeforeEach
     void setUp() {
         this.stat = new Stat();
-        this.winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        this.bonusNumber = new BonusNumber(7, winningLotto);
+        this.winningNumber = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        this.bonusNumber = new BonusNumber(7, winningNumber);
     }
 
     @Test
@@ -31,7 +31,7 @@ class StatTest {
         PurchaseMoney money = new PurchaseMoney(1000);
         Lotto fifthPrizeLotto = new Lotto(List.of(1, 2, 3, 10, 11, 12));
         Lottos lottos = new Lottos(List.of(fifthPrizeLotto));
-        WinningCombo winningCombo = new WinningCombo(winningLotto, bonusNumber);
+        WinningCombo winningCombo = new WinningCombo(winningNumber, bonusNumber);
         StatDto result = stat.calculate(lottos, winningCombo, money);
         assertThat(result.getRankCounts().get(Rank.FIFTH)).isEqualTo(1L);
         assertThat(result.getRankCounts().get(Rank.MISS)).isEqualTo(0L);
@@ -45,7 +45,7 @@ class StatTest {
         Lotto missLotto1 = new Lotto(List.of(10, 11, 12, 13, 14, 15));
         Lotto missLotto2 = new Lotto(List.of(16, 17, 18, 19, 20, 21));
         Lottos lottos = new Lottos(List.of(missLotto1, missLotto2));
-        WinningCombo winningCombo = new WinningCombo(winningLotto, bonusNumber);
+        WinningCombo winningCombo = new WinningCombo(winningNumber, bonusNumber);
         StatDto result = stat.calculate(lottos, winningCombo, money);
         assertThat(result.getRankCounts().get(Rank.MISS)).isEqualTo(2L);
         assertThat(result.getRankCounts().get(Rank.FIFTH)).isEqualTo(0L);
@@ -63,7 +63,7 @@ class StatTest {
         Lotto fifth = new Lotto(List.of(1, 2, 3, 8, 9, 10));
         Lotto miss = new Lotto(List.of(10, 11, 12, 13, 14, 15));
         Lottos lottos = new Lottos(List.of(first, second, third, fourth, fifth, miss));
-        WinningCombo winningCombo = new WinningCombo(winningLotto, bonusNumber);
+        WinningCombo winningCombo = new WinningCombo(winningNumber, bonusNumber);
         StatDto result = stat.calculate(lottos, winningCombo, money);
         assertThat(result.getRankCounts())
                 .containsEntry(Rank.FIRST, 1L)

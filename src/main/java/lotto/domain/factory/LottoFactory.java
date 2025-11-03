@@ -1,7 +1,5 @@
 package lotto.domain.factory;
 
-import java.util.List;
-import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.strategy.LottoGenStrategy;
 import lotto.domain.wrapper.PurchaseMoney;
@@ -29,10 +27,5 @@ public class LottoFactory {
      */
     public Lottos createLottos(PurchaseMoney money) {
         return money.purchaseLottos(this.strategy);
-    }
-
-    private Lotto createLotto() {
-        List<Integer> numbers = strategy.generate();
-        return new Lotto(numbers);
     }
 }

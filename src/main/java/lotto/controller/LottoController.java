@@ -50,27 +50,27 @@ public class LottoController {
     }
 
     private WinningCombo getWinningCombinationWithRetry() {
-        Lotto winningLotto = getWinningNumbersWithRetry();
-        BonusNumber bonusNumber = getBonusNumberWithRetry(winningLotto);
-        return new WinningCombo(winningLotto, bonusNumber);
+        Lotto winningNumber = getWinningNumbersWithRetry();
+        BonusNumber bonusNumber = getBonusNumberWithRetry(winningNumber);
+        return new WinningCombo(winningNumber, bonusNumber);
     }
 
     private Lotto getWinningNumbersWithRetry() {
         while (true) {
             try {
                 String input = view.readWinningNumbers();
-                return processor.createWinningLotto(input);
+                return processor.createwinningNumber(input);
             } catch (IllegalArgumentException e) {
                 view.printError(e.getMessage());
             }
         }
     }
 
-    private BonusNumber getBonusNumberWithRetry(Lotto winningLotto) {
+    private BonusNumber getBonusNumberWithRetry(Lotto winningNumber) {
         while (true) {
             try {
                 String input = view.readBonusNumber();
-                return processor.createBonusNumber(input, winningLotto);
+                return processor.createBonusNumber(input, winningNumber);
             } catch (IllegalArgumentException e) {
                 view.printError(e.getMessage());
             }

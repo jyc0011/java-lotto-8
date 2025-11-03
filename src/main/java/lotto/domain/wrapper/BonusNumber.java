@@ -23,9 +23,6 @@ public class BonusNumber {
         this.number = number;
     }
 
-    /**
-     * 보너스 번호가 1~45 사이의 수인지
-     */
     private void validateRange(int number) {
         if (number < 1 || number > 45) {
             throw new IllegalArgumentException(ErrorMessage.BONUS_NUMBER_OUT_OF_RANGE.getMessage());

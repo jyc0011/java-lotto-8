@@ -67,9 +67,9 @@ class LottoProcessorTest {
         Lottos lottos = new Lottos(List.of(fifthPrizeLotto));
         PlayerPurchaseDto purchase = new PlayerPurchaseDto(lottos, money);
 
-        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        BonusNumber bonusNumber = new BonusNumber(7, winningLotto);
-        WinningCombo winningCombo = new WinningCombo(winningLotto, bonusNumber);
+        Lotto winningNumber = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        BonusNumber bonusNumber = new BonusNumber(7, winningNumber);
+        WinningCombo winningCombo = new WinningCombo(winningNumber, bonusNumber);
         StatDto result = processor.calculateStatistics(purchase, winningCombo);
         assertThat(result.getFormattedProfitRate()).isEqualTo("500.0%");
     }

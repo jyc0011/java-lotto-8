@@ -31,7 +31,7 @@ public class InputParser {
      * 당첨 번호 입력을 파싱
      *
      * @param input 사용자의 원시 입력
-     * @return 파싱된 List<Integer>
+     * @return 파싱된 Integer 리스트
      * @throws IllegalArgumentException 6개가 아니거나, 공백이 있거나, 숫자가 아닌 경우
      */
     public List<Integer> parseWinningNumbers(String input) {

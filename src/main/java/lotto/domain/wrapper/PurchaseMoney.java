@@ -27,18 +27,12 @@ public class PurchaseMoney {
         this.amount = amount;
     }
 
-    /**
-     * 1000원 단위인지 확인
-     */
     private void validateUnit(int amount) {
         if (amount % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(ErrorMessage.AMOUNT_NOT_DIVISIBLE.getMessage());
         }
     }
 
-    /**
-     * 최소 금액 이상인지 확인
-     */
     private void validateMinimum(int amount) {
         if (amount < LOTTO_PRICE) {
             throw new IllegalArgumentException(ErrorMessage.AMOUNT_LESS_THAN_MINIMUM.getMessage());

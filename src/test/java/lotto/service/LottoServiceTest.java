@@ -24,9 +24,9 @@ class LottoServiceTest {
     void calculateStatistics_ShouldOrchestrate_StatCalculation() {
         LottoService lottoService = new LottoService(null);
         PurchaseMoney money = new PurchaseMoney(1000);
-        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        BonusNumber bonusNumber = new BonusNumber(7, winningLotto);
-        WinningCombo winningCombo = new WinningCombo(winningLotto, bonusNumber);
+        Lotto winningNumber = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        BonusNumber bonusNumber = new BonusNumber(7, winningNumber);
+        WinningCombo winningCombo = new WinningCombo(winningNumber, bonusNumber);
         Lotto fifthPrizeLotto = new Lotto(List.of(1, 2, 3, 10, 11, 12));
         Lottos lottos = new Lottos(List.of(fifthPrizeLotto));
         StatDto result = lottoService.calculateStatistics(lottos, winningCombo, money);
