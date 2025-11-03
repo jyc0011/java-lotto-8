@@ -21,7 +21,7 @@
 - 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException, 에러 메시지 출력, 그 부분부터 입력 다시
 
   | 구분 |  1등  |  2등   |  3등   |  4등   |  5등   |
-      |:--:|:----:|:-----:|:-----:|:-----:|:-----:|
+        |:--:|:----:|:-----:|:-----:|:-----:|:-----:|
   | 일치 |  6  |  5+a  |   5   |   4   |   3   |
   | 상금 |  2억  | 3000만 | 150만  |  5만   |  5천   |
 
@@ -130,141 +130,157 @@
 
 1. Wrapper
     - PurchaseMoney (immutable)
-        - [ ] 문자열 입력을 int로 변환, 유효성 검증
-        - [ ] input이 숫자가 아닐 경우 IllegalArgumentException
-        - [ ] 변환된 int가 1,000원 미만일 경우 IllegalArgumentException
-        - [ ] 변환된 int가 1,000으로 나누어 떨어지지 않을 경우 IllegalArgumentException
-        - [ ] 구매한 로또 개수 계산
-        - [ ] 원본 금액 제공
+        - [x] int 금액을 받아 유효성 검증
+        - [x] 1,000원 미만일 경우 IllegalArgumentException
+        - [x] 1,000으로 나누어 떨어지지 않을 경우 IllegalArgumentException
+        - [x] 구매한 로또 개수 계산
+        - [x] 총상금을 받아 Profit 객체 생성/반환
     - BonusNumber (immutable)
-        - [ ] 1~45 범위 유효성 검증 -> 아닐시 IllegalArgumentException
-        - [ ] 당첨 번호 중복 확인 -> 중복시 IllegalArgumentException
+        - [x] int 번호와 Lotto를 받아 유효성 검증
+        - [x] 1~45 범위 아닐시 IllegalArgumentException
+        - [x] 당첨 번호 중복시 IllegalArgumentException
+        - [x] 특정 Lotto에 포함되는지 확인
+    - Profit (immutable)
+        - [x] 총상금과 구매 금액을 받아 수익률 계산
+        - [x] 요구사항에 맞게 포매팅된 문자열 반환
+    - WinningCombo
+        - [x] Lotto와 BonusNumber를 래핑
 
 2. Domain
     - Lotto (immutable)
-        - [ ] 로또는 6개의 Integer로 구성 (개수, 중복 위반 시 IllegalArgumentException)
-        - [ ] 1~45 범위 유효성 검증 -> 아닐시 IllegalArgumentException
-        - [ ] 번호의 동일 여부 확인
-        - [ ] 다른 로또(당첨 번호)와 일치하는 번호의 개수를 계산
-        - [ ] 특정 보너스 번호를 포함하는지 확인
-        - [ ] 출력을 위해 정렬된 번호 목록을 제공
+        - [x] 로또는 6개의 Integer로 구성 (개수, 중복 위반 시 IllegalArgumentException)
+        - [x] 다른 로또(당첨 번호)와 일치하는 번호의 개수를 계산
+        - [x] 특정 보너스 번호를 포함하는지 확인
+        - [x] 출력을 위해 정렬된 번호 목록을 제공
     - Lottos (immutable)
-        - [ ] 발행한 Lotto 객체 목록 관리
-        - [ ] 전체 구매 개수 반환
-        - [ ] 내부 로또 목록을 순회
+        - [x] 발행한 Lotto 객체 목록 관리
+        - [x] 전체 구매 개수 반환
+        - [x] 내부 로또 목록을 순회
     - Rank (Enum, immutable)
-        - [ ] 1등부터 5등, 꽝(MISS)까지의 당첨 규칙과 상금 저장
-        - [ ] 일치하는 개수와 보너스 여부에 따라 Rank 결정
+        - [x] 1등부터 5등, 꽝(MISS)까지의 당첨 규칙과 상금 저장
+        - [x] 일치하는 개수와 보너스 여부에 따라 Rank 결정
+        - [x] 당첨 횟수를 받아 총 상금을 계산
     - Stat (immutable)
-        - [ ] Lottos, Lotto, BonusNumber로 당첨 통계 생성
-        - [ ] Rank별 당첨 횟수 관리
-        - [ ] PurchaseMoney로 총수익률 계산 -> 결과 StatDto로 반환
+        - [x] Lottos, Lotto, BonusNumber로 당첨 통계 생성
+        - [x] Rank별 당첨 횟수 관리
+        - [x] PurchaseMoney로 총수익률 계산 -> 결과 StatDto로 반환
 
 3. Factory
     - LottoFactory
-        - [ ] LottoGenStrategy 주입
-        - [ ] 구매 개수만큼 Lotto를 생성, Lottos로 리턴
+        - [x] LottoGenStrategy 주입
+        - [x] PurchaseMoney의 getLottoCount()를 호출하여 개수만큼 Lotto 생성, Lottos로 리턴
 
 4. Strategy
     - LottoGenStrategy (Interface)
-        - [ ] 로또 번호 6개 생성 규칙 정의
+        - [x] 로또 번호 6개 생성 규칙 정의
     - AutoGenStrategy
-        - [ ] Randoms.pickUniqueNumbersInRange(1, 45, 6)를 호출해 랜덤 번호를 생성
+        - [x] Randoms.pickUniqueNumbersInRange(1, 45, 6)를 호출해 랜덤 번호를 생성
 
 4. DTO
     - StatDto
-        - [ ] Stat이 계산한 Rank별 당첨 횟수로 수익률 저장
-        - [ ] View가 접근할 수 있는 데이터 제공
+        - [x] Stat이 계산한 Rank별 당첨 횟수로 수익률 저장
+        - [x] View가 접근할 수 있는 데이터 제공
+    - PlayerPurchaseDto
+        - [x] Lottos와 PurchaseMoney를 래핑
+        - [x] View가 접근할 수 있는 데이터 제공
 
 5. Service
     - LottoService
-        - [ ] LottoFactory를 주입받습니다.
-        - [ ] Controller 요청 -> 로또 구매를 LottoFactory에 위임
-        - [ ] Controller 요청 -> 당첨 통계 계산을 Stat에 위임, DTO 리턴
+        - [x] LottoFactory를 주입
+        - [x] 로또 구매를 LottoFactory에 위임
+        - [x] 통계 계산을 Stat에 위임
 
 6. Controller
     - LottoController
-        - [ ] LottoView, LottoProcessor 주입
-        - [ ] 전체 게임 실행 제어
-            - view에서 입력을 받고, processor을 통해 파싱 및 연산 수행, view를 통해 출력
+        - [x] LottoView, LottoProcessor 주입
+        - [x] 전체 게임 실행 제어
+        - [x] PlayerPurchaseDto와 WinningCombo 객체를 LottoProcessor에 전달
     - LottoView
-        - [ ] InputView, OutputView 주입
-        - [ ] 입력을 InputView에게서 받음
-        - [ ] 입력 재시도 제어
-        - [ ] 출력 요청을 OutputView에 위임
+        - [x] InputView, OutputView 주입
+        - [x] 입력을 InputView에게서 받음
+        - [x] 입력 재시도(Retry) 흐름 제어
+        - [x] 출력 요청을 OutputView에 위임
     - LottoProcessor
-        - [ ] LottoService, InputParser 주입
-        - [ ] 파싱 및 도메인 객체 생성 요청 수행
-        - [ ] 비즈니스 로직 실행을 LottoService에 위임
+        - [x] LottoService, InputParser 주입
+        - [x] LottoView의 요청을 받아 InputParser로 파싱 및 Wrapper/Domain 객체 생성
+        - [x] PurchaseMoney를 받아 로직 실행 후 PlayerPurchaseDto 반환
+        - [x] PlayerPurchaseDto, WinningCombo를 받아 Service에 로직 위임
 
 7. View
     - InputView
-        - [ ] 구입금액, 당첨 번호, 보너스 번호 입력 요청 -> Console.readLine() 리턴
+        - [x] 구입금액, 당첨 번호, 보너스 번호 입력 요청 -> Console.readLine() 리턴
     - OutputView
-        - [ ] 구매한 로또 개수와 번호 목록 출력
-        - [ ] 당첨 통계를 정해진 형식으로 출력
-        - [ ] 총수익률을 소수점 둘째 자리에서 반올림해 출력
-        - [ ] 에러 출력
+        - [x] 구매한 로또 개수와 번호 목록 출력
+        - [x] 당첨 통계를 정해진 형식으로 출력
+        - [x] 총수익률을 소수점 둘째 자리에서 반올림해 출력
+        - [x] 에러 출력
     - ErrorMessage (Enum)
-        - [ ] 에러 메시지 유형 정의
+        - [x] 에러 메시지 유형 정의
             - INVALID_AMOUNT
             - NOT_DIVISIBLE
             - OUT_OF_RANGE
             - DUPLICATE_NUMBER
-        - [ ] 에러 메시지 문자열 반환
+        - [x] 에러 메시지 문자열 반환
 
 8. Configure
     - AppConfig
-        - [ ] 애플리케이션 실행에 필요한 객체 생성, 의존성 주입
-        - [ ] View, Strategy, Factory, Parser, Service, Controller를 싱글톤으로 관리
-        - [ ] Application이 LottoController()를 호출하도록 함
+        - [x] 애플리케이션 실행에 필요한 객체 생성, 의존성 주입
+        - [x] View, Strategy, Factory, Parser, Service, Controller를 싱글톤으로 관리
+        - [x] Application이 LottoController()를 호출하도록 함
 
 9. Util
     - InputParser
-        - [ ] String을 알맞은 형식으로 파싱
-        - [ ] 형식에 대한 검증, 실패 시 IllegalArgumentException
+        - [x] String을 알맞은 형식으로 파싱
+        - [x] 형식에 대한 검증, 실패 시 IllegalArgumentException
 
 10. Test
     - 단위 테스트
         - PurchaseMoneyTest
-            - [ ] 1000, 8000로 객체 생성
-            - [ ] 8000 입력 시 로또 8개 계산
-            - [ ] '1001', '999', 'abc', ' ', null 등 유효하지 않은 금액 입력 시 -> IllegalArgumentException
+            - [x] 1000, 8000로 객체 생성
+            - [x] 8000 입력 시 로또 8개 계산
+            - [x] 1001, 999, 0 등 유효하지 않은 금액 입력 시 -> IllegalArgumentException
         - BonusNumberTest
-            - [ ] 1 ~ 45 사이의 수로 객체 생성
-            - [ ] x<1, x>45 등 불가능한 번호 ->IllegalArgumentException
-            - [ ] new BonusNumber(10) = new BonusNumber(10)
-            - [ ] 당첨 번호에 포함되지 않는 번호인 경우 생성
-            - [ ] 당첨 번호에 이미 포함된 번호로 생성 시 -> IllegalArgumentException
+            - [x] 1 ~ 45 사이의 수로 객체 생성
+            - [x] x<1, x>45 등 불가능한 번호 ->IllegalArgumentException
+            - [x] new BonusNumber(10) = new BonusNumber(10)
+            - [x] 당첨 번호에 포함되지 않는 번호인 경우 생성
+            - [x] 당첨 번호에 이미 포함된 번호로 생성 시 -> IllegalArgumentException
+        - ProfitTest
+            - [x] (5000, 8000) -> "62.5%"
+            - [x] (5000, 1000) -> "500.0%"
+            - [x] (0, 8000) -> "0.0%"
+            - [x] (5000, 0) -> "0.0%"
         - LottoTest
-            - [ ] 유효한 6개의 숫자 (중복 X, 범위 1-45)로 로또 생성
-            - [ ] 번호 5개, 7개 -> IllegalArgumentException
-            - [ ] 중복 번호 포함 -> IllegalArgumentException
-            - [ ] 범위 벗어난 번호 -> IllegalArgumentException
-            - [ ] 로또와 일치하는 번호 개수 계산
-            - [ ] 특정 번호 포함 여부 확인
+            - [x] 유효한 6개의 숫자 (중복 X, 범위 1-45)로 로또 생성
+            - [x] 번호 5개, 7개 -> IllegalArgumentException
+            - [x] 중복 번호 포함 -> IllegalArgumentException
+            - [x] 범위 벗어난 번호 -> IllegalArgumentException
+            - [x] 로또와 일치하는 번호 개수 계산
+            - [x] 특정 번호 포함 여부 확인
+            - [x] 정렬된 결과 출력
         - RankTest
-            - [ ] 일치하는 수와 보너스 여부에 따라 등수 결정
+            - [x] 일치하는 수와 보너스 여부에 따라 등수 결정
+            - [x] 총상금 계산
         - StatTest
-            - [ ] 시나리오별 당첨 통계 계산
-        - LottoFactoryTest (Mock)
-            - [ ] PurchaseMoney 전달 -> Lotto 생성, 알맞은 size Lottos 객체 리턴 여부 확인
+            - [x] 시나리오별 당첨 통계 계산
+        - LottoFactoryTest
+            - [x] PurchaseMoney(8000) 전달 시 getLottoCount() 호출, strategy.generate() 8번 호출 검증
         - LottoServiceTest
-            - [ ] LottoFactory의 로또 생성 확인
-            - [ ] Stat 객체 생성, 결과 DTO 리턴
+            - [x] LottoFactory의 로또 생성 확인
+            - [x] Stat 객체 생성, 결과 DTO 리턴
         - LottoControllerTest
-            - [ ] InputView, LottoService, OutputView 호출 여부 확인
-            - [ ] 구매 금액 입력 실패 시 printError, 재입력 받아 LottoService 호출
-            - [ ] 당첨 번호 입력 실패 시 printError, 재입력 받아 LottoService 호출
-            - [ ] 보너스 번호 입력 실패 시 printError, 재입력 받아 LottoService 호출
+            - [x] InputView, LottoService, OutputView 호출 여부 확인
+            - [x] 구매 금액 입력 실패 시 printError, 재입력 받아 LottoService 호출
+            - [x] 당첨 번호 입력 실패 시 printError, 재입력 받아 LottoService 호출
+            - [x] 보너스 번호 입력 실패 시 printError, 재입력 받아 LottoService 호출
 
     - 기능 테스트
-        - [ ] 5000으로 service를 호출했을 때, size()가 5인 Lottos 반환 확인
-        - [ ] 입력이 제대로 parsing 되고 있는지 확인
+        - [x] 5000으로 service를 호출했을 때, size()가 5인 Lottos 반환 확인
+        - [x] 입력이 제대로 parsing 되고 있는지 확인
 
     - 통합 테스트
         - ApplicationTest
-            - [ ] 1개 확인
+            - [x] 1개 확인
                 - Given: Randoms가 예제 1 ([8, 21, 23, 41, 42, 43])을 반환하도록 설정
                 - When: 사용자 입력(Mock Console)으로 1000 -> 1,2,3,8,21,41 -> 42 입력
                 - Then:
@@ -272,7 +288,7 @@
                     - "[8, 21, 23, 41, 42, 43]"
                     - "4개 일치 (50,000원) - 1개"
                     - "총 수익률은 5000.0%입니다."
-            - [ ] 예외 포함 확인
+            - [x] 예외 포함 확인
                 - Given: Randoms가 예제 8개 목록 리턴
                 - When: 사용자 입력
                     - 1001 (구매금액 1차 실패)
@@ -341,5 +357,5 @@
        ├── InputView.java
        └── OutputView.java
 ```
-
+![structure](/image/structure.png)
 ---
