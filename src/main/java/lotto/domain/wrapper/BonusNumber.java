@@ -1,7 +1,7 @@
 package lotto.domain.wrapper;
 
 import lotto.domain.Lotto;
-import lotto.view.ErrorMessage;
+import lotto.util.ErrorMessage;
 
 /**
  * 보너스 번호 1개에 대한 Wrapper 생성할 때 유효성 검증

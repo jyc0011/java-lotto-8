@@ -3,7 +3,6 @@ package lotto.util;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import lotto.view.ErrorMessage;
 
 /**
  * 사용자 입력 파싱하고, 입력 형식을 검증

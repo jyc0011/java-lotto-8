@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.util;
 
 /**
  * 에러 메시지 Enum

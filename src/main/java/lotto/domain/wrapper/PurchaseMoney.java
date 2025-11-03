@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
 import lotto.domain.strategy.LottoGenStrategy;
-import lotto.view.ErrorMessage;
+import lotto.util.ErrorMessage;
 
 /**
  * 로또 구입 금액 wrapper 생성할 때 1,000원 단위 및 1,000원 이상 여부 검증

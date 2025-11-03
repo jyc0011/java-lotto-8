@@ -20,10 +20,10 @@
 - 당첨 번호와 보너스 번호를 입력받고, 로또와 당첨 번호를 비교해 당첨 내역 및 수익률을 출력, 로또 게임 종료
 - 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException, 에러 메시지 출력, 그 부분부터 입력 다시
 
-  | 구분 |  1등  |  2등   |  3등   |  4등   |  5등   |
-        |:--:|:----:|:-----:|:-----:|:-----:|:-----:|
-  | 일치 |  6  |  5+a  |   5   |   4   |   3   |
-  | 상금 |  2억  | 3000만 | 150만  |  5만   |  5천   |
+    | 구분 |  1등  |  2등   |  3등   |  4등   |  5등   |
+    |:--:|:----:|:-----:|:-----:|:-----:|:-----:|
+    | 일치 |  6  |  5+a  |   5   |   4   |   3   |
+    | 상금 |  2억  | 3000만 | 150만  |  5만   |  5천   |
 
 ### 입출력
 
@@ -214,13 +214,6 @@
         - [x] 당첨 통계를 정해진 형식으로 출력
         - [x] 총수익률을 소수점 둘째 자리에서 반올림해 출력
         - [x] 에러 출력
-    - ErrorMessage (Enum)
-        - [x] 에러 메시지 유형 정의
-            - INVALID_AMOUNT
-            - NOT_DIVISIBLE
-            - OUT_OF_RANGE
-            - DUPLICATE_NUMBER
-        - [x] 에러 메시지 문자열 반환
 
 8. Configure
     - AppConfig
@@ -232,6 +225,13 @@
     - InputParser
         - [x] String을 알맞은 형식으로 파싱
         - [x] 형식에 대한 검증, 실패 시 IllegalArgumentException
+    - ErrorMessage (Enum)
+        - [x] 에러 메시지 유형 정의
+            - INVALID_AMOUNT
+            - NOT_DIVISIBLE
+            - OUT_OF_RANGE
+            - DUPLICATE_NUMBER
+        - [x] 에러 메시지 문자열 반환
 
 10. Test
     - 단위 테스트
@@ -350,10 +350,10 @@
    │   └── LottoService.java
    │
    ├── 📁util
+   │   ├── ErrorMessage.java
    │   └── InputParser.java
    │
    └── 📁view
-       ├── ErrorMessage.java
        ├── InputView.java
        └── OutputView.java
 ```
