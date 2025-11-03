@@ -3,8 +3,6 @@ package lotto.domain.wrapper;
 import lotto.domain.Lotto;
 import lotto.view.ErrorMessage;
 
-import java.util.Objects;
-
 /**
  * 보너스 번호 1개에 대한 Wrapper
  * 생성할 때 유효성 검증
@@ -31,8 +29,7 @@ public class BonusNumber {
      */
     private void validateRange(int number) {
         if (number < 1 || number > 45) {
-            // TODO: ErrorMessage Enum에서 메시지 가져오기
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 1부터 45 사이의 숫자여야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.BONUS_NUMBER_OUT_OF_RANGE.getMessage());
         }
     }
 
@@ -41,18 +38,18 @@ public class BonusNumber {
      */
     private void validateDuplicate(int number, Lotto winningNumber) {
         if (winningNumber.contains(number)) {
-            // TODO: ErrorMessag에서 메시지 가져오기
-            throw new IllegalArgumentException("[ERROR] 보너스 번호가 당첨 번호와 중복됩니다.");
+            throw new IllegalArgumentException(ErrorMessage.BONUS_NUMBER_DUPLICATE.getMessage());
         }
     }
 
     /**
-     * 보너스 번호 리턴
+     * 주어진 로또(lotto)에 포함되어 있는지 확인
      *
-     * @return 보너스 번호
+     * @param lotto 확인할 로또 1장
+     * @return 포함되어 있으면 true
      */
-    public int getNumber() {
-        return number;
+    public boolean isContainedIn(Lotto lotto) {
+        return lotto.contains(this.number);
     }
 
 }

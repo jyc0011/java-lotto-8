@@ -1,5 +1,11 @@
 package lotto.domain.wrapper;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.domain.strategy.LottoGenStrategy;
 import lotto.view.ErrorMessage;
 
 /**
@@ -28,8 +34,7 @@ public class PurchaseMoney {
      */
     private void validateUnit(int amount) {
         if (amount % LOTTO_PRICE != 0) {
-            // TODO: ErrorMessage Enum에서 메시지 가져오기
-            throw new IllegalArgumentException("[ERROR] 금액은 1,000원 단위여야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.AMOUNT_NOT_DIVISIBLE.getMessage());
         }
     }
 
@@ -38,26 +43,30 @@ public class PurchaseMoney {
      */
     private void validateMinimum(int amount) {
         if (amount < LOTTO_PRICE) {
-            // TODO: ErrorMessage Enum에서 메시지 가져오기
-            throw new IllegalArgumentException("[ERROR] 최소 구입 금액은 1,000원입니다.");
+            throw new IllegalArgumentException(ErrorMessage.AMOUNT_LESS_THAN_MINIMUM.getMessage());
         }
     }
 
     /**
-     * 구매 로또 개수 리턴
+     * 구매 금액에 해당하는 로또 생성
      *
-     * @return 로또 개수
+     * @param strategy 로또 생성 전략
+     * @return 생성된 로또 묶음 (Lottos)
      */
-    public int getLottoCount() {
-        return amount / LOTTO_PRICE;
+    public Lottos purchaseLottos(LottoGenStrategy strategy) {
+        int count = this.amount / LOTTO_PRICE;
+        List<Lotto> generatedLottos = IntStream.range(0, count)
+                .mapToObj(i -> new Lotto(strategy.generate()))
+                .collect(Collectors.toList());
+        return new Lottos(generatedLottos);
     }
 
     /**
-     * 구매 금액 리턴
+     * 구매 금액에 대한 수익률  계산
      *
      * @return 구매 금액
      */
-    public int getAmount() {
-        return amount;
+    public Profit calculateProfit(long totalPrize) {
+        return new Profit(totalPrize, this.amount);
     }
 }
