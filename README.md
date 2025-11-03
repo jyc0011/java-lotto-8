@@ -176,7 +176,7 @@
     - AutoGenStrategy
         - [x] Randoms.pickUniqueNumbersInRange(1, 45, 6)를 호출해 랜덤 번호를 생성
 
-4. DTO
+5. DTO
     - StatDto
         - [x] Stat이 계산한 Rank별 당첨 횟수로 수익률 저장
         - [x] View가 접근할 수 있는 데이터 제공
@@ -184,13 +184,13 @@
         - [x] Lottos와 PurchaseMoney를 래핑
         - [x] View가 접근할 수 있는 데이터 제공
 
-5. Service
+6. Service
     - LottoService
         - [x] LottoFactory를 주입
         - [x] 로또 구매를 LottoFactory에 위임
         - [x] 통계 계산을 Stat에 위임
 
-6. Controller
+7. Controller
     - LottoController
         - [x] LottoView, LottoProcessor 주입
         - [x] 전체 게임 실행 제어
@@ -206,7 +206,7 @@
         - [x] PurchaseMoney를 받아 로직 실행 후 PlayerPurchaseDto 반환
         - [x] PlayerPurchaseDto, WinningCombo를 받아 Service에 로직 위임
 
-7. View
+8. View
     - InputView
         - [x] 구입금액, 당첨 번호, 보너스 번호 입력 요청 -> Console.readLine() 리턴
     - OutputView
@@ -215,25 +215,25 @@
         - [x] 총수익률을 소수점 둘째 자리에서 반올림해 출력
         - [x] 에러 출력
 
-8. Configure
+9. Configure
     - AppConfig
         - [x] 애플리케이션 실행에 필요한 객체 생성, 의존성 주입
         - [x] View, Strategy, Factory, Parser, Service, Controller를 싱글톤으로 관리
         - [x] Application이 LottoController()를 호출하도록 함
 
-9. Util
-    - InputParser
-        - [x] String을 알맞은 형식으로 파싱
-        - [x] 형식에 대한 검증, 실패 시 IllegalArgumentException
-    - ErrorMessage (Enum)
-        - [x] 에러 메시지 유형 정의
-            - INVALID_AMOUNT
-            - NOT_DIVISIBLE
-            - OUT_OF_RANGE
-            - DUPLICATE_NUMBER
-        - [x] 에러 메시지 문자열 반환
+10. Util
+     - InputParser
+         - [x] String을 알맞은 형식으로 파싱
+         - [x] 형식에 대한 검증, 실패 시 IllegalArgumentException
+     - ErrorMessage (Enum)
+         - [x] 에러 메시지 유형 정의
+             - INVALID_AMOUNT
+             - NOT_DIVISIBLE
+             - OUT_OF_RANGE
+             - DUPLICATE_NUMBER
+         - [x] 에러 메시지 문자열 반환
 
-10. Test
+11. Test
     - 단위 테스트
         - PurchaseMoneyTest
             - [x] 1000, 8000로 객체 생성
