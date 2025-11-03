@@ -1,9 +1,14 @@
 package lotto;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import java.util.stream.Stream;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
@@ -52,6 +57,36 @@ class ApplicationTest extends NsTest {
             runException("1000j");
             assertThat(output()).contains(ERROR_MESSAGE);
         });
+    }
+
+    /**
+     * 재입력 시나리오에서 사용할 파라미터 제공
+     */
+    static Stream<Arguments> provideRetryScenarios() {
+        return Stream.of(
+                Arguments.of("구매 금액 재입력", (Object) new String[]{
+                        "1001", "abc", "8000", "1,2,3,4,5,6", "7"}),
+                Arguments.of("당첨 번호 재입력", (Object) new String[]{
+                        "8000", "1,2,3,4,5,5", "1,2,3", "1,2,3,4,5,6", "7"}),
+                Arguments.of("보너스 번호 재입력", (Object) new String[]{
+                        "8000", "1,2,3,4,5,6", "6", "46", "7"})
+        );
+    }
+
+    @DisplayName("예외 테스트: 잘못된 입력 시 에러 메시지 출력 후 재입력")
+    @ParameterizedTest(name = "[{0}]")
+    @MethodSource("provideRetryScenarios")
+    void retryInputTest(String testName, String[] inputs) {
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    run(inputs);
+                    assertThat(output()).contains(ERROR_MESSAGE, "8개를 구매했습니다.", "총 수익률은 62.5%입니다.");
+                },
+                List.of(8, 21, 23, 41, 42, 43), List.of(3, 5, 11, 16, 32, 38),
+                List.of(7, 11, 16, 35, 36, 44), List.of(1, 8, 11, 31, 41, 42),
+                List.of(13, 14, 16, 38, 42, 45), List.of(7, 11, 30, 40, 42, 43),
+                List.of(2, 13, 22, 32, 38, 45), List.of(1, 3, 5, 14, 22, 45)
+        );
     }
 
     @Override
