@@ -1,5 +1,6 @@
 package lotto;
 
+import camp.nextstep.edu.missionutils.Console;
 import lotto.config.AppConfig;
 import lotto.controller.LottoController;
 
@@ -8,5 +9,6 @@ public class Application {
         AppConfig appConfig = new AppConfig();
         LottoController lottoController = appConfig.lottoController();
         lottoController.run();
+        Console.close();
     }
 }

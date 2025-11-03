@@ -1,14 +1,12 @@
 package lotto.util;
 
-// import lotto.view.ErrorMessage; // ErrorMessage Enum 경로
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import lotto.view.ErrorMessage;
 
 /**
- * 사용자 입력을 파싱(Parsing)하고, 입력 형식(Format)을 검증하는 책임을 가지는 클래스입니다. (Stateless)
+ * 사용자 입력 파싱하고, 입력 형식을 검증
  */
 public class InputParser {
 
@@ -17,7 +15,7 @@ public class InputParser {
     private static final int LOTTO_NUMBER_COUNT = 6;
 
     /**
-     * 단일 숫자 입력을 파싱합니다. (구매 금액, 보너스 번호용)
+     * 단일 숫자 입력을 파싱
      *
      * @param input 사용자의 원시 입력
      * @return 파싱된 int
@@ -30,7 +28,7 @@ public class InputParser {
     }
 
     /**
-     * 당첨 번호 입력을 파싱합니다. (e.g., "1,2,3,4,5,6")
+     * 당첨 번호 입력을 파싱
      *
      * @param input 사용자의 원시 입력
      * @return 파싱된 List<Integer>
@@ -38,12 +36,9 @@ public class InputParser {
      */
     public List<Integer> parseWinningNumbers(String input) {
         validateNotNullOrBlank(input);
-        validateNoSpaces(input); // "1, 2, 3" 같은 입력 방지
-
+        validateNoSpaces(input);
         String[] numberStrings = input.split(WINNING_NUMBER_DELIMITER);
         validateCount(numberStrings);
-
-        // 'parseInt' 메서드를 재활용하여 각 숫자를 파싱 및 검증
         try {
             return Arrays.stream(numberStrings)
                     .map(this::parseInt)
